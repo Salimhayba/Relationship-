@@ -1,8 +1,9 @@
 {
-  "name": "نظام إدارة العلاقات الأسرية والرضاعة",
+‏  "name": "نظام إدارة العلاقات الأسرية والرضاعة",
   "short_name": "الأسرة والرضاعة",
   "description": "نظام لإدارة القرابة النسبية والرضاعة وفق أحكام الفقه الإسلامي",
-  "start_url": "./nizam-v99.html",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#1a5c38",
@@ -19,7 +20,5 @@
     { "src": "icons/icon-384.png", "sizes": "384x384", "type": "image/png", "purpose": "any maskable" },
     { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ],
-  "screenshots": [],
-  "categories": ["utilities", "lifestyle"],
   "prefer_related_applications": false
 }
