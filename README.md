@@ -1,5 +1,5 @@
 pwa/
-اﻟﺘﻄﺒﯿﻖ اﻟﺮﺋﯿﺴﻲ ← nizam-v99.html ──├
+اﻟﺘﻄﺒﯿﻖ اﻟﺮﺋﯿﺴﻲ ← nizam-v100.html ──├
 )اﻻﺳﻢ، اﻷﯾﻘﻮﻧﺔ، اﻷﻟﻮان( PWA إﻋﺪادات ← manifest.json ──├
 ├── sw.js ← Service Worker (ﻟﻠﻌﻤﻞ Offline)
 أﯾﻘﻮﻧﺎت ﺑﺄﺣﺠﺎم ﻣﺨﺘﻠﻔﺔ ← /icons ──├
