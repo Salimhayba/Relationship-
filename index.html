@@ -6,11 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#1a5c38">
-<meta name="description" content="نظام إدارة القرابة النسبية والرضاعة وفق الفقه الإسلامي">
 <title>نظام إدارة العلاقات الأسرية والرضاعة</title>
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
-<link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152.png">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -325,6 +321,192 @@ body.dark .sc2{background:var(--cd)!important;}
 body.dark .inp{background:#0a1510!important;color:var(--in)!important;border-color:var(--br)!important;}
 body.dark .mn2{background:#0a1510!important;border-color:var(--br)!important;}
 body.dark .card,body.dark .sc,body.dark .pi,body.dark .ri,body.dark .rli,body.dark .fc,body.dark .audit-item,body.dark .mb2{background:var(--cd);border-color:var(--br);}
+[data-theme="ocean"]{--g:#1a4a6b;--gl:#2176b0;--gp:#e8f2fb;--in:#0a1929;--im:#1a3a5c;--is:#3a6a9a;--iu:#6a9ac0;--br:#b0d4f0;--bg:#f0f7fd;--cd:#fff;--sh:0 2px 20px rgba(26,74,107,0.07);--shm:0 8px 32px rgba(26,74,107,0.14)}
+[data-theme="gold"]{--g:#7a5800;--gl:#c49a00;--gp:#fdf7e3;--in:#1a1200;--im:#3a2a00;--is:#7a6a30;--iu:#a09060;--br:#e8d890;--bg:#fffdf0;--cd:#fff;--sh:0 2px 20px rgba(122,88,0,0.07);--shm:0 8px 32px rgba(122,88,0,0.14)}
+[data-theme="purple"]{--g:#4a1a6b;--gl:#8b4ab0;--gp:#f5eefb;--in:#1a0a29;--im:#3a1a5c;--is:#7a4a9a;--iu:#a07ac0;--br:#d4b0f0;--bg:#faf5fd;--cd:#fff;--sh:0 2px 20px rgba(74,26,107,0.07);--shm:0 8px 32px rgba(74,26,107,0.14)}
+[data-theme="dark"]{--g:#2e9e56;--gl:#4ade80;--gp:#0a1f12;--in:#e8f5ed;--im:#b0d4bc;--is:#7aaa8a;--iu:#5a8a6a;--br:#1a3a2a;--bg:#0f1f15;--cd:#1a2e20;--sh:0 2px 20px rgba(0,0,0,0.3);--shm:0 8px 32px rgba(0,0,0,0.4)}
+.theme-bar{display:flex;gap:8px;padding:8px 16px;background:var(--cd);border-bottom:1px solid var(--br);overflow-x:auto;scrollbar-width:none}
+.theme-bar::-webkit-scrollbar{display:none}
+.theme-dot{width:28px;height:28px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:transform .2s,border-color .2s;flex-shrink:0}
+.theme-dot.active{border-color:var(--in);transform:scale(1.15)}
+.footer-bar{background:linear-gradient(135deg,#0a1f12,#1a5c38);color:rgba(255,255,255,0.7);text-align:center;padding:14px 16px;font-size:11px;line-height:1.8}
+.pwa-banner{position:fixed;bottom:70px;left:12px;right:12px;background:var(--cd);border:1px solid var(--br);border-radius:14px;padding:14px 16px;box-shadow:var(--shm);z-index:400;display:flex;align-items:center;gap:12px;animation:slideUp .4s ease}
+@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.pwa-btn-install{background:var(--g);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:Cairo,sans-serif}
+.pwa-btn-later{background:none;border:1px solid var(--br);border-radius:8px;padding:8px 10px;font-size:11px;cursor:pointer;color:var(--iu);font-family:Cairo,sans-serif}
+.mr-title{font-size:13px;font-weight:700;color:var(--g);margin-bottom:8px;border-bottom:1px solid var(--br);padding-bottom:4px;margin-top:12px}
+</style>
+<style id="tree-styles">
+/**
+ * tree.css
+ * أنماط شريط أدوات شجرة العائلة
+ * نظام إدارة العلاقات الأسرية والرضاعة — أبو يامن
+ */
+
+#page-tree,
+.page-tree {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.tree-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  background: var(--cd, #fff);
+  border: 1px solid var(--br, #e5e7eb);
+  border-radius: 14px;
+  padding: 10px 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.tree-toolbar input[type="search"] {
+  flex: 1;
+  min-width: 160px;
+  border: 1px solid var(--br, #d1d5db);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-family: Cairo, Tajawal, sans-serif;
+  font-size: 14px;
+  background: var(--bg, #f9fafb);
+  color: var(--tx, #111);
+  outline: none;
+}
+
+.tree-toolbar input[type="search"]:focus {
+  border-color: #1a5c38;
+  box-shadow: 0 0 0 3px rgba(26, 92, 56, 0.12);
+}
+
+.tree-filters,
+.tree-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tree-filters button,
+.tree-actions button {
+  border: 1px solid var(--br, #d1d5db);
+  background: var(--bg, #f3f4f6);
+  color: var(--tx, #1f2937);
+  border-radius: 10px;
+  padding: 7px 12px;
+  font-family: Cairo, Tajawal, sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.tree-filters button:hover,
+.tree-actions button:hover {
+  background: #e8f5e9;
+  border-color: #1a5c38;
+}
+
+.tree-filters button.active {
+  background: #1a5c38;
+  border-color: #1a5c38;
+  color: #fff;
+}
+
+/* ألوان أزرار الفلترة */
+.tree-filters button[data-filter="NASAB"].active {
+  background: #c0392b;
+  border-color: #c0392b;
+}
+.tree-filters button[data-filter="MILK"].active {
+  background: #27ae60;
+  border-color: #27ae60;
+}
+.tree-filters button[data-filter="MUSAHARA"].active {
+  background: #e67e22;
+  border-color: #e67e22;
+}
+
+#family-tree-container {
+  width: 100%;
+  height: min(70vh, 620px);
+  min-height: 360px;
+  border-radius: 16px;
+  border: 1px solid var(--br, #e5e7eb);
+  background: var(--cd, #fff);
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.02);
+}
+
+/* مفتاح الألوان */
+.tree-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--tx, #4b5563);
+  font-family: Cairo, Tajawal, sans-serif;
+  padding: 0 4px;
+}
+
+.tree-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tree-legend i {
+  width: 18px;
+  height: 3px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.tree-legend .lg-nasab i { background: #c0392b; }
+.tree-legend .lg-milk i { background: #27ae60; }
+.tree-legend .lg-musahara i {
+  background: repeating-linear-gradient(
+    90deg,
+    #e67e22 0 6px,
+    transparent 6px 10px
+  );
+}
+.tree-legend .lg-marriage i { background: #8e44ad; height: 4px; }
+
+/* تجاوب الجوال */
+@media (max-width: 640px) {
+  .tree-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  #family-tree-container {
+    height: 55vh;
+    min-height: 300px;
+  }
+}
+
+/* الوضع الليلي */
+body.dark .tree-toolbar,
+body.dark #family-tree-container {
+  background: var(--cd, #1e1e1e);
+  border-color: var(--br, #333);
+}
+
+body.dark .tree-toolbar input[type="search"] {
+  background: #2a2a2a;
+  color: #eee;
+  border-color: #444;
+}
+
+body.dark .tree-filters button,
+body.dark .tree-actions button {
+  background: #2a2a2a;
+  color: #eee;
+  border-color: #444;
+}
+
 </style>
 </head>
 <body>
@@ -349,7 +531,14 @@ body.dark .card,body.dark .sc,body.dark .pi,body.dark .ri,body.dark .rli,body.da
     <div class="hs"><div class="dot"></div><span id="hdr-stat">...</span></div>
   </div>
 </header>
-
+<div class="theme-bar">
+  <span style="font-size:11px;color:var(--iu)">🎨</span>
+  <div class="theme-dot active" data-t="default" style="background:linear-gradient(135deg,#1a5c38,#2e9e56)" onclick="setTheme('default')" title="أخضر"></div>
+  <div class="theme-dot" data-t="ocean" style="background:linear-gradient(135deg,#1a4a6b,#2176b0)" onclick="setTheme('ocean')" title="بحري"></div>
+  <div class="theme-dot" data-t="gold" style="background:linear-gradient(135deg,#7a5800,#c49a00)" onclick="setTheme('gold')" title="ذهبي"></div>
+  <div class="theme-dot" data-t="purple" style="background:linear-gradient(135deg,#4a1a6b,#8b4ab0)" onclick="setTheme('purple')" title="بنفسجي"></div>
+  <div class="theme-dot" data-t="dark" style="background:linear-gradient(135deg,#0f1f15,#2e9e56)" onclick="setTheme('dark')" title="داكن"></div>
+</div>
 <div class="layout">
   <!-- ══ Sidebar ══ -->
   <aside>
@@ -359,6 +548,7 @@ body.dark .card,body.dark .sc,body.dark .pi,body.dark .ri,body.dark .rli,body.da
       <button class="nb" onclick="goPage('relationships')"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>العلاقات</button>
       <button class="nb" onclick="goPage('persons')"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>الأشخاص</button>
       <button class="nb" onclick="goPage('breastfeeding')"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>الرضاعة</button>
+      <button class="nb" onclick="goPage('tree')">🌳 شجرة العائلة</button>
       <button class="nb" onclick="goPage('audit')"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>سجل العمليات</button>
       <hr class="sd">
       <div class="ms" onclick="goPage('relationships');setTimeout(()=>setFilter(''),50)"><span>👨‍👩‍👧‍👦 أسر</span><strong id="sb-f" style="color:var(--g)">0</strong></div>
@@ -460,7 +650,8 @@ body.dark .card,body.dark .sc,body.dark .pi,body.dark .ri,body.dark .rli,body.da
     <div id="page-relationships" class="pg">
       <div class="ph">
         <div><div class="pt">العلاقات المستنتجة</div><div class="ps" id="rels-sub">0 علاقة</div></div>
-        <div style="display:flex;gap:8px">
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn bp bsm" onclick="showMahramReport(${p.id})">👁 المحارم والأجانب</button>
           <button class="btn bblue bsm" onclick="showManualRelModal()">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             علاقة يدوية
@@ -521,7 +712,32 @@ body.dark .card,body.dark .sc,body.dark .pi,body.dark .ri,body.dark .rli,body.da
     </div>
 
     <!-- ══ سجل العمليات ══ -->
-    <div id="page-audit" class="pg">
+    <div id="page-tree" class="pg">
+  <div class="ph"><div><div class="pt">🌳 شجرة العائلة</div><div class="ps">عرض بصري هرمي للعلاقات الأسرية</div></div></div>
+  <div class="tree-toolbar">
+    <input type="search" id="tree-search" placeholder="ابحث عن شخص..." autocomplete="off">
+    <div class="tree-filters">
+      <button type="button" data-filter="ALL" class="active" onclick="treeFilter('ALL')">الكل</button>
+      <button type="button" data-filter="NASAB" onclick="treeFilter('NASAB')">نسب</button>
+      <button type="button" data-filter="MILK" onclick="treeFilter('MILK')">رضاعة</button>
+      <button type="button" data-filter="MUSAHARA" onclick="treeFilter('MUSAHARA')">مصاهرة</button>
+    </div>
+    <div class="tree-actions">
+      <button type="button" onclick="familyTreeInstance&&familyTreeInstance.resetView()">↺ إعادة</button>
+      <button type="button" onclick="familyTreeInstance&&familyTreeInstance.fit()">⊞ ملائمة</button>
+      <button type="button" onclick="familyTreeInstance&&familyTreeInstance.exportPNG()">📷 صورة</button>
+    </div>
+  </div>
+  <div class="tree-legend">
+    <span class="lg-nasab"><i></i> نسب (محرم)</span>
+    <span class="lg-milk"><i></i> رضاعة</span>
+    <span class="lg-musahara"><i></i> مصاهرة</span>
+    <span class="lg-marriage"><i></i> زواج</span>
+  </div>
+  <div id="family-tree-container"></div>
+</div>
+
+<div id="page-audit" class="pg">
       <div class="ph">
         <div><div class="pt">سجل العمليات</div><div class="ps">تاريخ جميع التعديلات والإضافات</div></div>
         <div style="display:flex;gap:8px">
@@ -984,7 +1200,7 @@ const ScenarioTests={
 };
 
 const CONFIG={
-  APP_VERSION:'99',
+  APP_VERSION:'100',
   MAX_SUGGESTIONS:6,
   STORAGE_KEYS:{VERSION:'mk_v',DARK:'mk_dark',PERSONS:'mk_p',RECORDS:'mk_r',RELS:'mk_rl',AUDIT:'mk_audit'},
 };
@@ -2949,9 +3165,10 @@ function renderAudit(){
 }
 function clearAudit(){confirmDo('مسح سجل العمليات؟',()=>{DataLayer.saveAudit([]);renderAudit();toast('✓ تم المسح');});}
 
-const PAGES=['dashboard','checker','relationships','persons','breastfeeding','audit'];
+const PAGES=['dashboard','checker','relationships','persons','breastfeeding','audit','tree'];
 let curPage='dashboard';
 function goPage(id){
+  if(id==='tree') setTimeout(initFamilyTree,50);
   PAGES.forEach(p=>document.getElementById('page-'+p)?.classList.remove('active'));
   document.getElementById('page-'+id)?.classList.add('active');
   document.querySelectorAll('.nb').forEach((b,i)=>b.classList.toggle('active',PAGES[i]===id));
@@ -3003,7 +3220,10 @@ function hardReset(){
      CONFIG.STORAGE_KEYS.RELS,CONFIG.STORAGE_KEYS.AUDIT].forEach(k=>localStorage.removeItem(k));
     DataLayer.savePersons(SP);DataLayer.saveRecords(SR);
     localStorage.setItem(CONFIG.STORAGE_KEYS.VERSION,APP_VERSION);
-    safeRun(()=>{Engine.run();updateStats();buildFilterTabs();renderDashboard();});
+    const savedTheme=localStorage.getItem('mk_theme')||'default';
+  setTheme(savedTheme);
+  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();pwaDeferredPrompt=e;if(!localStorage.getItem('pwa_dismissed')){setTimeout(()=>{const b=document.getElementById('pwa-banner');if(b)b.style.display='flex';},3000);}});
+  safeRun(()=>{Engine.run();updateStats();buildFilterTabs();renderDashboard();});
     goPage('dashboard');
     addAudit('استعادة','إعادة تعيين','');toast('✓ تمت إعادة التعيين');
   });
@@ -3475,6 +3695,240 @@ const FamilyWizard={
   },
 };
 
+
+// ══ إدارة الثيمات اللونية ══
+let pwaDeferredPrompt=null;
+function setTheme(name){
+  const h=document.documentElement;
+  ['ocean','gold','purple','dark'].forEach(t=>h.removeAttribute('data-theme'));
+  if(name!=='default')h.setAttribute('data-theme',name);
+  localStorage.setItem('mk_theme',name);
+  document.querySelectorAll('.theme-dot').forEach(d=>d.classList.toggle('active',d.dataset.t===name));
+}
+function showMahramReport(pid){
+  const persons=DataLayer.getPersons(),rels=DataLayer.getRelationships(),pmap=DataLayer.personMap(),p=pmap[pid];
+  if(!p)return;
+  const opp=persons.filter(x=>x.gender!==p.gender&&x.id!==pid);
+  const mahram=[],temp=[],ok=[];
+  for(const o of opp){const v=VerdictGenerator.generate(pid,o.id,rels,pmap);if(v.verdict==='perm_forbidden')mahram.push(o);else if(v.verdict==='temp_forbidden')temp.push(o);else if(v.verdict==='permitted')ok.push(o);}
+  const ic=g=>g==='أنثى'?'👩':'👨';
+  const ch=o=>`<span onclick="closeModal();showProfile(${o.id})" class="profile-chip">${ic(o.gender)} ${escapeHTML(o.name)}</span>`;
+  const sec=(title,arr,col)=>`<div class="mr-title" style="color:${col}">${title} (${arr.length})</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px">${arr.map(ch).join('')||'<span style="font-size:12px;color:var(--iu)">لا يوجد</span>'}</div>`;
+  document.getElementById('modal-msg').innerHTML=`<div style="padding:4px"><div style="font-size:15px;font-weight:800;color:var(--in);margin-bottom:12px;text-align:center">${ic(p.gender)} ${escapeHTML(p.name)}</div>${sec('🚫 محارم مؤبدون',mahram,'#c0392b')}${sec('⏳ محارم مؤقتون',temp,'#b7860f')}${sec('✅ يجوز الزواج',ok,'#1a6b1a')}</div>`;
+  document.getElementById('modal-ok').textContent='إغلاق';
+  document.getElementById('modal-ok').onclick=closeModal;
+  document.getElementById('modal').classList.add('open');
+}
+
+// ══════════════════════════════════════════════
+// شجرة العائلة SVG (مدمجة، بدون مكتبات خارجية)
+// ══════════════════════════════════════════════
+
+const FamilyTreeSVG = {
+  _drag: null,
+  _vx: 0, _vy: 0, _scale: 1,
+  _filter: 'ALL',
+  _persons: [], _rels: [],
+
+  init(persons, rels){
+    this._persons = persons;
+    this._rels = rels;
+    this._vx = 0; this._vy = 0; this._scale = 1;
+    this.render();
+  },
+
+  render(){
+    const container = document.getElementById('family-tree-container');
+    if(!container) return;
+    const {nodes, edges} = this._buildLayout();
+    const W = Math.max(900, nodes.reduce((m,n)=>Math.max(m,n.x+80),0)+100);
+    const H = Math.max(600, nodes.reduce((m,n)=>Math.max(m,n.y+60),0)+80);
+
+    const edgeSVG = edges.map(e=>{
+      if(this._filter!=='ALL' && e.cls!==this._filter) return '';
+      const A=nodes.find(n=>n.id==e.from), B=nodes.find(n=>n.id==e.to);
+      if(!A||!B) return '';
+      const colors={nasab:'#c0392b',milk:'#1a6b3a',musahara:'#b7860f',marriage:'#6a4ab0'};
+      const col = colors[e.type]||'#888';
+      const mx=(A.x+B.x)/2, my=(A.y+B.y)/2;
+      return `<path d="M${A.x},${A.y+28} Q${mx},${my} ${B.x},${B.y+28}"
+        fill="none" stroke="${col}" stroke-width="2" stroke-dasharray="${e.type==='marriage'?'6,3':''}" opacity="0.8"/>`;
+    }).join('');
+
+    const nodeSVG = nodes.map(n=>{
+      const p=this._persons.find(x=>x.id==n.id);
+      if(!p) return '';
+      const ic = p.gender==='أنثى'?'👩':'👨';
+      const bg = p.gender==='أنثى'?'#9d174d':'#1a4a6b';
+      return `<g class="tree-node" transform="translate(${n.x-40},${n.y})"
+          onclick="FamilyTreeSVG.onNodeClick(${n.id})" style="cursor:pointer">
+        <rect width="80" height="52" rx="10" fill="${bg}" opacity="0.92"/>
+        <text x="40" y="20" text-anchor="middle" font-size="18" dominant-baseline="middle" fill="white">${ic}</text>
+        <text x="40" y="40" text-anchor="middle" font-size="9" fill="white" font-family="Cairo,sans-serif"
+          style="white-space:nowrap">${escapeHTML(p.name.length>8?p.name.slice(0,8)+'…':p.name)}</text>
+      </g>`;
+    }).join('');
+
+    container.innerHTML = `
+      <div style="width:100%;overflow:hidden;position:relative;touch-action:none" id="tree-svg-wrap">
+        <svg id="tree-svg" width="${W}" height="${H}"
+          style="transform:translate(${this._vx}px,${this._vy}px) scale(${this._scale});transform-origin:0 0;transition:transform .1s">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="#888"/>
+            </marker>
+          </defs>
+          <g id="tree-edges">${edgeSVG}</g>
+          <g id="tree-nodes">${nodeSVG}</g>
+        </svg>
+      </div>`;
+
+    this._bindDrag();
+  },
+
+  _buildLayout(){
+    const families = {};
+    this._rels.filter(r=>r.type==='زوج وزوجة'||r.relClass==='marriage'||(r.type&&r.type.includes('زوج')))
+      .forEach(r=>{
+        const key=Math.min(r.aId,r.bId)+'-'+Math.max(r.aId,r.bId);
+        families[key]={h:r.aId, w:r.bId, children:[]};
+      });
+    this._rels.filter(r=>r.type==='أب وابنه'||r.type==='أم وابنها'||r.relClass==='parent')
+      .forEach(r=>{
+        // نجد الأسرة المناسبة
+        for(const k in families){
+          const f=families[k];
+          if(f.h===r.aId||f.w===r.aId) f.children.push(r.bId);
+        }
+      });
+
+    const nodes=[], edges=[];
+    const placed=new Set();
+    let rowY=60, xGap=110, yGap=130;
+
+    // نرتب الأسر
+    let famX=60;
+    Object.values(families).forEach(fam=>{
+      const hid=fam.h, wid=fam.w;
+      if(!placed.has(hid)){nodes.push({id:hid,x:famX,y:rowY});placed.add(hid);}
+      if(!placed.has(wid)){nodes.push({id:wid,x:famX+xGap,y:rowY});placed.add(wid);}
+      edges.push({from:hid,to:wid,type:'marriage',cls:'MARRIAGE'});
+      fam.children.forEach((cid,i)=>{
+        const cx=famX+(i-(fam.children.length-1)/2)*xGap;
+        if(!placed.has(cid)){nodes.push({id:cid,x:cx,y:rowY+yGap});placed.add(cid);}
+        edges.push({from:hid,to:cid,type:'nasab',cls:'NASAB'});
+      });
+      famX+=Math.max(xGap*2, fam.children.length*xGap+20);
+    });
+
+    // الأشخاص غير المرتبطين
+    this._persons.filter(p=>!placed.has(p.id)).forEach((p,i)=>{
+      nodes.push({id:p.id, x:famX+i*xGap, y:rowY});
+    });
+
+    // إضافة علاقات رضاعة ومصاهرة للعرض
+    this._rels.filter(r=>r.type==='أم رضاعة').forEach(r=>{
+      edges.push({from:r.aId,to:r.bId,type:'milk',cls:'MILK'});
+    });
+
+    return {nodes, edges};
+  },
+
+  filterByType(type){
+    this._filter=type;
+    this.render();
+  },
+
+  search(q){
+    if(!q){document.querySelectorAll('#tree-svg .tree-node').forEach(n=>n.style.opacity='1');return;}
+    const ql=q.toLowerCase();
+    document.querySelectorAll('#tree-svg .tree-node').forEach(n=>{
+      const txt=n.textContent.toLowerCase();
+      n.style.opacity=txt.includes(ql)?'1':'0.2';
+    });
+  },
+
+  resetView(){this._vx=0;this._vy=0;this._scale=1;this._applyTransform();},
+  fit(){
+    const wrap=document.getElementById('tree-svg-wrap');
+    const svg=document.getElementById('tree-svg');
+    if(!wrap||!svg) return;
+    const sw=svg.getAttribute('width'), sh=svg.getAttribute('height');
+    const ww=wrap.clientWidth, wh=wrap.clientHeight||500;
+    this._scale=Math.min(ww/sw, wh/sh, 1);
+    this._vx=0; this._vy=0;
+    this._applyTransform();
+  },
+  exportPNG(){
+    const svg=document.getElementById('tree-svg');
+    if(!svg)return;
+    const data=new XMLSerializer().serializeToString(svg);
+    const blob=new Blob([data],{type:'image/svg+xml'});
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='family-tree.svg';
+    a.click();
+  },
+  _applyTransform(){
+    const svg=document.getElementById('tree-svg');
+    if(svg) svg.style.transform=`translate(${this._vx}px,${this._vy}px) scale(${this._scale})`;
+  },
+  _bindDrag(){
+    const wrap=document.getElementById('tree-svg-wrap');
+    if(!wrap) return;
+    let dragging=false, startX=0, startY=0, startVX=0, startVY=0;
+    wrap.onmousedown=wrap.ontouchstart=(e)=>{
+      dragging=true;
+      const pt=e.touches?e.touches[0]:e;
+      startX=pt.clientX; startY=pt.clientY;
+      startVX=this._vx; startVY=this._vy;
+    };
+    wrap.onmousemove=wrap.ontouchmove=(e)=>{
+      if(!dragging) return;
+      const pt=e.touches?e.touches[0]:e;
+      this._vx=startVX+(pt.clientX-startX);
+      this._vy=startVY+(pt.clientY-startY);
+      this._applyTransform();
+    };
+    wrap.onmouseup=wrap.ontouchend=()=>{dragging=false;};
+    wrap.onwheel=(e)=>{
+      e.preventDefault();
+      this._scale=Math.max(0.2,Math.min(3,this._scale*(e.deltaY<0?1.1:0.9)));
+      this._applyTransform();
+    };
+  },
+  onNodeClick(id){
+    if(typeof goPage==='function') goPage('persons');
+    setTimeout(()=>{if(typeof showProfile==='function') showProfile(Number(id));},100);
+  },
+  destroy(){
+    const c=document.getElementById('family-tree-container');
+    if(c) c.innerHTML='';
+  }
+};
+
+// ── دوال الربط مع النظام ──
+let familyTreeInstance = null;
+
+function initFamilyTree(){
+  const persons=DataLayer.getPersons();
+  const rels=DataLayer.getRelationships();
+  FamilyTreeSVG.init(persons,rels);
+  familyTreeInstance=FamilyTreeSVG;
+  // ربط بحث الشجرة
+  const si=document.getElementById('tree-search');
+  if(si){si.oninput=function(){clearTimeout(si._t);si._t=setTimeout(()=>FamilyTreeSVG.search(si.value),200);};}
+}
+
+function treeFilter(type){
+  document.querySelectorAll('#page-tree [data-filter]').forEach(b=>b.classList.remove('active'));
+  const btn=document.querySelector('#page-tree [data-filter="'+type+'"]');
+  if(btn) btn.classList.add('active');
+  FamilyTreeSVG.filterByType(type);
+}
+
+
+
 (function init(){
   const v=localStorage.getItem(CONFIG.STORAGE_KEYS.VERSION);
   if(!v){
@@ -3623,15 +4077,20 @@ const FamilyWizard={
   </div>
 </div>
 
-
-<script>
-if('serviceWorker' in navigator){
-  window.addEventListener('load',()=>{
-    navigator.serviceWorker.register('./sw.js')
-      .then(r=>console.log('[PWA] SW:',r.scope))
-      .catch(e=>console.warn('[PWA] SW failed:',e));
-  });
-}
-</script>
+<div class="footer-bar">
+  <div style="font-weight:600;color:rgba(255,255,255,0.9)">نظام إدارة العلاقات الأسرية والرضاعة</div>
+  <div>جميع الحقوق محفوظة لـ أ/ سالم عبد الواحد (أبو يامن) © 2025</div>
+</div>
+<div id="pwa-banner" style="display:none;position:fixed;bottom:70px;left:12px;right:12px;background:var(--cd);border:1px solid var(--br);border-radius:14px;padding:14px 16px;box-shadow:var(--shm);z-index:400;align-items:center;gap:12px;animation:slideUp .4s ease">
+  <div style="width:44px;height:44px;background:var(--g);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🏠</div>
+  <div style="flex:1">
+    <strong style="display:block;font-size:13px;color:var(--in);margin-bottom:2px">ثبّت التطبيق على جهازك</strong>
+    <span style="font-size:11px;color:var(--iu)">للوصول السريع والعمل بدون إنترنت</span>
+  </div>
+  <div style="display:flex;gap:8px;flex-shrink:0">
+    <button class="pwa-btn-install" onclick="pwaDeferredPrompt?.prompt();document.getElementById('pwa-banner').style.display='none'">تثبيت ✅</button>
+    <button class="pwa-btn-later" onclick="localStorage.setItem('pwa_dismissed','1');document.getElementById('pwa-banner').style.display='none'">لاحقاً</button>
+  </div>
+</div>
 </body>
 </html>
